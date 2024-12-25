@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="./src/styles/style.css">
+</head>
+
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside id="sidebar"
+            class="fixed inset-y-0 left-0 z-50 w-64 transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0">
+            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+                <div class="flex items-center mb-5 gap-2">
+                    <i class="fa-solid fa-shop fa-xl" style="color: #74C0FC;"></i>
+                    <span class="text-xl font-semibold dark:text-white">Dashboard Kasir</span>
+                </div>
+
+                <nav class="space-y-2">
+                    <button data-section="section-1"
+                        class="nav-item w-full flex items-center p-2 rounded-lg transition-colors duration-200 text-white hover:bg-gray-100 hover:text-gray-900 ">
+                        <i class="fa-brands fa-product-hunt fa-xl"></i>
+                        <span class="ml-3">Product</span>
+                    </button>
+
+                    <button data-section="section-2"
+                        class="nav-item w-full flex items-center p-2 rounded-lg transition-colors duration-200 text-white hover:bg-gray-100 hover:text-gray-900">
+                        <i class="fa-solid fa-bag-shopping fa-xl" style="color: #63E6BE;"></i>
+                        <span class="ml-3">Checkout</span>
+                    </button>
+
+                    <button data-section="section-3"
+                        class="nav-item w-full flex items-center p-2 rounded-lg transition-colors duration-200 text-white hover:bg-gray-100 hover:text-gray-900">
+                        <i class="fa-solid fa-comment" style="color: #B197FC;"></i>
+                        <span class="ml-3">Inbox</span>
+                    </button>
+
+                    <button data-section="section-4"
+                        class="nav-item w-full flex items-center p-2 rounded-lg transition-colors duration-200 text-white hover:bg-gray-100 hover:text-gray-900">
+                        <i class="fa-solid fa-user" style="color: #B197FC;"></i>
+                        <span class="ml-3">Users</span>
+                    </button>
+
+                    <button data-section="section-5" onclick="window.open('./src/auth/register.html', '_blank')"
+                        class="nav-item w-full flex items-center p-2 rounded-lg transition-colors duration-200 text-white hover:bg-gray-100 hover:text-gray-900">
+                        <i class="fa-solid fa-arrow-right-to-bracket" style="color: #B197FC;"></i>
+                        <span class="ml-3">Sign In</span>
+                    </button>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-button" class="md:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-gray-200">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4 overflow-auto">
+            <div id="section-1" class="section-content">
+                <div class="font-sans p-4 mx-auto lg:max-w-6xl md:max-w-4xl">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-800 mb-6 sm:mb-10">Premium Threads</h2>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                        <div
+                            class="bg-white flex flex-col rounded overflow-hidden shadow-md cursor-pointer hover:scale-[1.01] transition-all">
+                            <div class="w-full">
+                                <img src="https://readymadeui.com/images/product1.webp" alt="Product 1"
+                                    class="w-full object-cover object-top aspect-[230/307]" />
+                            </div>
+
+                            <div class="p-4 flex-1 flex flex-col">
+                                <div class="flex-1">
+                                    <h5 class="text-sm sm:text-base font-bold text-gray-800 line-clamp-2">Lexicon Luxe
+                                    </h5>
+                                    <div class="mt-2 flex items-center flex-wrap gap-2">
+                                        <h6 class="text-sm sm:text-base font-bold text-gray-800">$10</h6>
+                                        <div class="bg-gray-100 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer ml-auto"
+                                            title="Wishlist">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                class="fill-gray-800 inline-block" viewBox="0 0 64 64">
+                                                <path
+                                                    d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"
+                                                    data-original="#000000"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                    class="px-2 h-9 font-semibold w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white tracking-wide ml-auto outline-none border-none rounded">Add
+                                    to cart</button>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white flex flex-col rounded overflow-hidden shadow-md cursor-pointer hover:scale-[1.01] transition-all">
+                            <div class="w-full">
+                                <img src="https://readymadeui.com/images/product2.webp" alt="Product 2"
+                                    class="w-full object-cover object-top aspect-[230/307]" />
+                            </div>
+
+                            <div class="p-4 flex-1 flex flex-col">
+                                <div class="flex-1">
+                                    <h5 class="text-sm sm:text-base font-bold text-gray-800 line-clamp-2">Adjective
+                                        Attire</h5>
+                                    <div class="mt-2 flex items-center flex-wrap gap-2">
+                                        <h6 class="text-sm sm:text-base font-bold text-gray-800">$12</h6>
+                                        <div class="bg-gray-100 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer ml-auto"
+                                            title="Wishlist">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                class="fill-gray-800 inline-block" viewBox="0 0 64 64">
+                                                <path
+                                                    d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"
+                                                    data-original="#000000"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                    class="px-2 h-9 font-semibold w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white tracking-wide ml-auto outline-none border-none rounded">Add
+                                    to cart</button>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white flex flex-col rounded overflow-hidden shadow-md cursor-pointer hover:scale-[1.01] transition-all">
+                            <div class="w-full">
+                                <img src="https://readymadeui.com/images/product3.webp" alt="Product 3"
+                                    class="w-full object-cover object-top aspect-[230/307]" />
+                            </div>
+
+                            <div class="p-4 flex-1 flex flex-col">
+                                <div class="flex-1">
+                                    <h5 class="text-sm sm:text-base font-bold text-gray-800 line-clamp-2">ThreadCraft
+                                        Vibes</h5>
+                                    <div class="mt-2 flex items-center flex-wrap gap-2">
+                                        <h6 class="text-sm sm:text-base font-bold text-gray-800">$14</h6>
+                                        <div class="bg-gray-100 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer ml-auto"
+                                            title="Wishlist">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                class="fill-gray-800 inline-block" viewBox="0 0 64 64">
+                                                <path
+                                                    d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"
+                                                    data-original="#000000"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                    class="px-2 h-9 font-semibold w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white tracking-wide ml-auto outline-none border-none rounded">Add
+                                    to cart</button>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white flex flex-col rounded overflow-hidden shadow-md cursor-pointer hover:scale-[1.01] transition-all">
+                            <div class="w-full">
+                                <img src="https://readymadeui.com/images/product7.webp" alt="Product 3"
+                                    class="w-full object-cover object-top aspect-[230/307]" />
+                            </div>
+
+                            <div class="p-4 flex-1 flex flex-col">
+                                <div class="flex-1">
+                                    <h5 class="text-sm sm:text-base font-bold text-gray-800 line-clamp-2">Verbal Vogue
+                                        Tees</h5>
+                                    <div class="mt-2 flex items-center flex-wrap gap-2">
+                                        <h6 class="text-sm sm:text-base font-bold text-gray-800">$12</h6>
+                                        <div class="bg-gray-100 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer ml-auto"
+                                            title="Wishlist">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                class="fill-gray-800 inline-block" viewBox="0 0 64 64">
+                                                <path
+                                                    d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"
+                                                    data-original="#000000"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                    class="px-2 h-9 font-semibold w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white tracking-wide ml-auto outline-none border-none rounded">Add
+                                    to cart</button>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white flex flex-col rounded overflow-hidden shadow-md cursor-pointer hover:scale-[1.01] transition-all">
+                            <div class="w-full">
+                                <img src="https://readymadeui.com/images/product5.webp" alt="Product 3"
+                                    class="w-full object-cover object-top aspect-[230/307]" />
+                            </div>
+
+                            <div class="p-4 flex-1 flex flex-col">
+                                <div class="flex-1">
+                                    <h5 class="text-sm sm:text-base font-bold text-gray-800 line-clamp-2">Jargon Jungle
+                                    </h5>
+                                    <div class="mt-2 flex items-center flex-wrap gap-2">
+                                        <h6 class="text-sm sm:text-base font-bold text-gray-800">$15</h6>
+                                        <div class="bg-gray-100 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer ml-auto"
+                                            title="Wishlist">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                class="fill-gray-800 inline-block" viewBox="0 0 64 64">
+                                                <path
+                                                    d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"
+                                                    data-original="#000000"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                    class="px-2 h-9 font-semibold w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white tracking-wide ml-auto outline-none border-none rounded">Add
+                                    to cart</button>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white flex flex-col rounded overflow-hidden shadow-md cursor-pointer hover:scale-[1.01] transition-all">
+                            <div class="w-full">
+                                <img src="https://readymadeui.com/images/product6.webp" alt="Product 3"
+                                    class="w-full object-cover object-top aspect-[230/307]" />
+                            </div>
+
+                            <div class="p-4 flex-1 flex flex-col">
+                                <div class="flex-1">
+                                    <h5 class="text-sm sm:text-base font-bold text-gray-800 line-clamp-2">Syllable
+                                        Streetwear</h5>
+                                    <div class="mt-2 flex items-center flex-wrap gap-2">
+                                        <h6 class="text-sm sm:text-base font-bold text-gray-800">$14</h6>
+                                        <div class="bg-gray-100 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer ml-auto"
+                                            title="Wishlist">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                class="fill-gray-800 inline-block" viewBox="0 0 64 64">
+                                                <path
+                                                    d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"
+                                                    data-original="#000000"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                    class="px-2 h-9 font-semibold w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white tracking-wide ml-auto outline-none border-none rounded">Add
+                                    to cart</button>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white flex flex-col rounded overflow-hidden shadow-md cursor-pointer hover:scale-[1.01] transition-all">
+                            <div class="w-full">
+                                <img src="https://readymadeui.com/images/product1.webp" alt="Product 3"
+                                    class="w-full object-cover object-top aspect-[230/307]" />
+                            </div>
+
+                            <div class="p-4 flex-1 flex flex-col">
+                                <div class="flex-1">
+                                    <h5 class="text-sm sm:text-base font-bold text-gray-800 line-clamp-2">Syllable
+                                        Streetwear</h5>
+                                    <div class="mt-2 flex items-center flex-wrap gap-2">
+                                        <h6 class="text-sm sm:text-base font-bold text-gray-800">$14</h6>
+                                        <div class="bg-gray-100 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer ml-auto"
+                                            title="Wishlist">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                class="fill-gray-800 inline-block" viewBox="0 0 64 64">
+                                                <path
+                                                    d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"
+                                                    data-original="#000000"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                    class="px-2 h-9 font-semibold w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white tracking-wide ml-auto outline-none border-none rounded">Add
+                                    to cart</button>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white flex flex-col rounded overflow-hidden shadow-md cursor-pointer hover:scale-[1.01] transition-all">
+                            <div class="w-full">
+                                <img src="https://readymadeui.com/images/product2.webp" alt="Product 3"
+                                    class="w-full object-cover object-top aspect-[230/307]" />
+                            </div>
+
+                            <div class="p-4 flex-1 flex flex-col">
+                                <div class="flex-1">
+                                    <h5 class="text-sm sm:text-base font-bold text-gray-800 line-clamp-2">Syllable
+                                        Streetwear</h5>
+                                    <div class="mt-2 flex items-center flex-wrap gap-2">
+                                        <h6 class="text-sm sm:text-base font-bold text-gray-800">$14</h6>
+                                        <div class="bg-gray-100 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer ml-auto"
+                                            title="Wishlist">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                class="fill-gray-800 inline-block" viewBox="0 0 64 64">
+                                                <path
+                                                    d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"
+                                                    data-original="#000000"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                    class="px-2 h-9 font-semibold w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white tracking-wide ml-auto outline-none border-none rounded">Add
+                                    to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section-2" class="section-content hidden">
+                <div class="bg-white p-1 rounded-lg shadow">
+                    <div class="font-sans md:max-w-7xl max-md:max-w-xl mx-auto bg-white py-4">
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="md:col-span-2 bg-gray-100 p-4 rounded-md">
+                                <h2 class="text-2xl font-bold text-gray-800">Cart</h2>
+                                <hr class="border-gray-300 mt-4 mb-8" />
+
+                                <div class="space-y-4">
+                                    <div class="grid grid-cols-3 items-center gap-4">
+                                        <div class="col-span-2 flex items-center gap-4">
+                                            <div class="w-24 h-24 shrink-0 bg-white p-2 rounded-md">
+                                                <img src='https://readymadeui.com/images/product14.webp'
+                                                    class="w-full h-full object-contain" />
+                                            </div>
+
+                                            <div>
+                                                <h3 class="text-base font-bold text-gray-800">Velvet Sneaker</h3>
+                                                <h6 class="text-xs text-red-500 cursor-pointer mt-0.5">Remove</h6>
+
+                                                <div class="flex gap-4 mt-4">
+                                                    <div class="relative group">
+                                                        <button type="button"
+                                                            class="flex items-center px-2.5 py-1.5 border border-gray-300 text-gray-800 text-xs outline-none bg-transparent rounded-md">
+                                                            XL
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="w-2.5 fill-gray-500 inline ml-2.5"
+                                                                viewBox="0 0 24 24">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z"
+                                                                    clip-rule="evenodd" data-original="#000000" />
+                                                            </svg>
+                                                        </button>
+
+                                                        <ul
+                                                            class='group-hover:block hidden absolute rounded-md min-w-[80px] shadow-lg bg-white z-[1000]'>
+                                                            <li
+                                                                class='py-2 px-4 hover:bg-gray-100 text-gray-800 text-xs cursor-pointer'>
+                                                                SM</li>
+                                                            <li
+                                                                class='py-2 px-4 hover:bg-gray-100 text-gray-800 text-xs cursor-pointer'>
+                                                                MD</li>
+                                                            <li
+                                                                class='py-2 px-4 hover:bg-gray-100 text-gray-800 text-xs cursor-pointer'>
+                                                                XL</li>
+                                                            <li
+                                                                class='py-2 px-4 hover:bg-gray-100 text-gray-800 text-xs cursor-pointer'>
+                                                                XXL</li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div>
+                                                        <button type="button"
+                                                            class="flex items-center px-2.5 py-1.5 border border-gray-300 text-gray-800 text-xs outline-none bg-transparent rounded-md">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="w-2.5 fill-current" viewBox="0 0 124 124">
+                                                                <path
+                                                                    d="M112 50H12C5.4 50 0 55.4 0 62s5.4 12 12 12h100c6.6 0 12-5.4 12-12s-5.4-12-12-12z"
+                                                                    data-original="#000000"></path>
+                                                            </svg>
+
+                                                            <span class="mx-2.5">1</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="w-2.5 fill-current" viewBox="0 0 42 42">
+                                                                <path
+                                                                    d="M37.059 16H26V4.941C26 2.224 23.718 0 21 0s-5 2.224-5 4.941V16H4.941C2.224 16 0 18.282 0 21s2.224 5 4.941 5H16v11.059C16 39.776 18.282 42 21 42s5-2.224 5-4.941V26h11.059C39.776 26 42 23.718 42 21s-2.224-5-4.941-5z"
+                                                                    data-original="#000000"></path>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ml-auto">
+                                            <h4 class="text-base font-bold text-gray-800">$20.00</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-3 items-center gap-4">
+                                        <div class="col-span-2 flex items-center gap-4">
+                                            <div class="w-24 h-24 shrink-0 bg-white p-2 rounded-md">
+                                                <img src='https://readymadeui.com/images/watch5.webp'
+                                                    class="w-full h-full object-contain" />
+                                            </div>
+
+                                            <div>
+                                                <h3 class="text-base font-bold text-gray-800">Smart Watch Timex</h3>
+                                                <h6 class="text-xs text-red-500 cursor-pointer mt-0.5">Remove</h6>
+
+                                                <div class="flex gap-4 mt-4">
+                                                    <div class="relative group">
+                                                        <button type="button"
+                                                            class="flex items-center px-2.5 py-1.5 border border-gray-300 text-gray-800 text-xs outline-none bg-transparent rounded-md">
+                                                            XL
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="w-2.5 fill-gray-500 inline ml-2.5"
+                                                                viewBox="0 0 24 24">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z"
+                                                                    clip-rule="evenodd" data-original="#000000" />
+                                                            </svg>
+                                                        </button>
+
+                                                        <ul
+                                                            class='group-hover:block hidden absolute rounded-md min-w-[80px] shadow-lg bg-white z-[1000]'>
+                                                            <li
+                                                                class='py-2 px-4 hover:bg-gray-100 text-gray-800 text-xs cursor-pointer'>
+                                                                SM</li>
+                                                            <li
+                                                                class='py-2 px-4 hover:bg-gray-100 text-gray-800 text-xs cursor-pointer'>
+                                                                MD</li>
+                                                            <li
+                                                                class='py-2 px-4 hover:bg-gray-100 text-gray-800 text-xs cursor-pointer'>
+                                                                XL</li>
+                                                            <li
+                                                                class='py-2 px-4 hover:bg-gray-100 text-gray-800 text-xs cursor-pointer'>
+                                                                XXL</li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div>
+                                                        <button type="button"
+                                                            class="flex items-center px-2.5 py-1.5 border border-gray-300 text-gray-800 text-xs outline-none bg-transparent rounded-md">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="w-2.5 fill-current" viewBox="0 0 124 124">
+                                                                <path
+                                                                    d="M112 50H12C5.4 50 0 55.4 0 62s5.4 12 12 12h100c6.6 0 12-5.4 12-12s-5.4-12-12-12z"
+                                                                    data-original="#000000"></path>
+                                                            </svg>
+
+                                                            <span class="mx-2.5">1</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="w-2.5 fill-current" viewBox="0 0 42 42">
+                                                                <path
+                                                                    d="M37.059 16H26V4.941C26 2.224 23.718 0 21 0s-5 2.224-5 4.941V16H4.941C2.224 16 0 18.282 0 21s2.224 5 4.941 5H16v11.059C16 39.776 18.282 42 21 42s5-2.224 5-4.941V26h11.059C39.776 26 42 23.718 42 21s-2.224-5-4.941-5z"
+                                                                    data-original="#000000"></path>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ml-auto">
+                                            <h4 class="text-base font-bold text-gray-800">$120.00</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-3 items-center gap-4">
+                                        <div class="col-span-2 flex items-center gap-4">
+                                            <div class="w-24 h-24 shrink-0 bg-white p-2 rounded-md">
+                                                <img src='https://readymadeui.com/images/sunglass1.webp'
+                                                    class="w-full h-full object-contain" />
+                                            </div>
+
+                                            <div>
+                                                <h3 class="text-base font-bold text-gray-800">Sun Glass</h3>
+                                                <h6 class="text-xs text-red-500 cursor-pointer mt-0.5">Remove</h6>
+
+                                                <div class="flex gap-4 mt-4">
+                                                    <div class="relative group">
+                                                        <button type="button"
+                                                            class="flex items-center px-2.5 py-1.5 border border-gray-300 text-gray-800 text-xs outline-none bg-transparent rounded-md">
+                                                            XL
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="w-2.5 fill-gray-500 inline ml-2.5"
+                                                                viewBox="0 0 24 24">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z"
+                                                                    clip-rule="evenodd" data-original="#000000" />
+                                                            </svg>
+                                                        </button>
+
+                                                        <ul
+                                                            class='group-hover:block hidden absolute rounded-md min-w-[80px] shadow-lg bg-white z-[1000]'>
+                                                            <li
+                                                                class='py-2 px-4 hover:bg-gray-100 text-gray-800 text-xs cursor-pointer'>
+                                                                SM</li>
+                                                            <li
+                                                                class='py-2 px-4 hover:bg-gray-100 text-gray-800 text-xs cursor-pointer'>
+                                                                MD</li>
+                                                            <li
+                                                                class='py-2 px-4 hover:bg-gray-100 text-gray-800 text-xs cursor-pointer'>
+                                                                XL</li>
+                                                            <li
+                                                                class='py-2 px-4 hover:bg-gray-100 text-gray-800 text-xs cursor-pointer'>
+                                                                XXL</li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div>
+                                                        <button type="button"
+                                                            class="flex items-center px-2.5 py-1.5 border border-gray-300 text-gray-800 text-xs outline-none bg-transparent rounded-md">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="w-2.5 fill-current" viewBox="0 0 124 124">
+                                                                <path
+                                                                    d="M112 50H12C5.4 50 0 55.4 0 62s5.4 12 12 12h100c6.6 0 12-5.4 12-12s-5.4-12-12-12z"
+                                                                    data-original="#000000"></path>
+                                                            </svg>
+
+                                                            <span class="mx-2.5">1</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="w-2.5 fill-current" viewBox="0 0 42 42">
+                                                                <path
+                                                                    d="M37.059 16H26V4.941C26 2.224 23.718 0 21 0s-5 2.224-5 4.941V16H4.941C2.224 16 0 18.282 0 21s2.224 5 4.941 5H16v11.059C16 39.776 18.282 42 21 42s5-2.224 5-4.941V26h11.059C39.776 26 42 23.718 42 21s-2.224-5-4.941-5z"
+                                                                    data-original="#000000"></path>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ml-auto">
+                                            <h4 class="text-base font-bold text-gray-800">$50.00</h4>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="bg-gray-100 rounded-md p-4 md:sticky top-0">
+                                <div class="flex border border-blue-600 overflow-hidden rounded-md">
+                                    <input type="email" placeholder="Buyer Name"
+                                        class="w-full outline-none bg-white text-gray-600 text-sm px-4 py-2.5" />
+                                    <button type='button'
+                                        class="flex items-center justify-center font-semibold tracking-wide bg-blue-600 hover:bg-blue-700 px-4 text-sm text-white">
+                                        Sent
+                                    </button>
+                                </div>
+
+                                <ul class="text-gray-800 mt-8 space-y-4">
+                                    <li class="flex flex-wrap gap-4 text-base">Discount <span
+                                            class="ml-auto font-bold">$0.00</span></li>
+                                    <li class="flex flex-wrap gap-4 text-base">Shipping <span
+                                            class="ml-auto font-bold">$2.00</span></li>
+                                    <li class="flex flex-wrap gap-4 text-base">Tax <span
+                                            class="ml-auto font-bold">$4.00</span></li>
+                                    <li class="flex flex-wrap gap-4 text-base font-bold">Total <span
+                                            class="ml-auto">$52.00</span></li>
+                                </ul>
+
+                                <div class="mt-8 space-y-2">
+                                    <button type="button"
+                                        class="text-sm px-4 py-2.5 w-full font-semibold tracking-wide bg-blue-600 hover:bg-blue-700 text-white rounded-md">Checkout</button>
+                                    <button type="button"
+                                        class="text-sm px-4 py-2.5 w-full font-semibold tracking-wide bg-transparent text-gray-800 border border-gray-300 rounded-md">Continue
+                                        Shopping </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section-3" class="section-content hidden">
+                <div class="flex flex-col gap-4">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h2 class="text-2xl font-bold mb-4">Inbox</h2>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <!-- Dummy Image -->
+                            <img src="https://via.placeholder.com/100" alt="Food Image"
+                                class="w-24 h-24 object-cover rounded-lg">
+                            <!-- Detail Pesanan -->
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold">Nama Pembeli: John Doe</h3>
+                                <p>Pesanan: Nasi Goreng Spesial</p>
+                                <p>Email: johndoe@example.com</p>
+                                <p>Total Harga: Rp 50.000</p>
+                            </div>
+                            <!-- Tombol Lihat -->
+                            <button
+                                class="bg-blue-500 border-red-400 text-black px-4 py-2 rounded-lg hover:bg-blue-600">
+                                Lihat
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h2 class="text-2xl font-bold mb-4">Inbox</h2>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <!-- Dummy Image -->
+                            <img src="https://via.placeholder.com/100" alt="Food Image"
+                                class="w-24 h-24 object-cover rounded-lg">
+                            <!-- Detail Pesanan -->
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold">Nama Pembeli: John Doe</h3>
+                                <p>Pesanan: Nasi Goreng Spesial</p>
+                                <p>Email: johndoe@example.com</p>
+                                <p>Total Harga: Rp 50.000</p>
+                            </div>
+                            <!-- Tombol Lihat -->
+                            <button
+                                class="bg-blue-500 border-red-400 text-black px-4 py-2 rounded-lg hover:bg-blue-600">
+                                Lihat
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h2 class="text-2xl font-bold mb-4">Inbox</h2>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <!-- Dummy Image -->
+                            <img src="https://via.placeholder.com/100" alt="Food Image"
+                                class="w-24 h-24 object-cover rounded-lg">
+                            <!-- Detail Pesanan -->
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold">Nama Pembeli: John Doe</h3>
+                                <p>Pesanan: Nasi Goreng Spesial</p>
+                                <p>Email: johndoe@example.com</p>
+                                <p>Total Harga: Rp 50.000</p>
+                            </div>
+                            <!-- Tombol Lihat -->
+                            <button
+                                class="bg-blue-500 border-red-400 text-black px-4 py-2 rounded-lg hover:bg-blue-600">
+                                Lihat
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h2 class="text-2xl font-bold mb-4">Inbox</h2>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <!-- Dummy Image -->
+                            <img src="https://via.placeholder.com/100" alt="Food Image"
+                                class="w-24 h-24 object-cover rounded-lg">
+                            <!-- Detail Pesanan -->
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold">Nama Pembeli: John Doe</h3>
+                                <p>Pesanan: Nasi Goreng Spesial</p>
+                                <p>Email: johndoe@example.com</p>
+                                <p>Total Harga: Rp 50.000</p>
+                            </div>
+                            <!-- Tombol Lihat -->
+                            <button
+                                class="bg-blue-500 border-red-400 text-black px-4 py-2 rounded-lg hover:bg-blue-600">
+                                Lihat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="section-4" class="section-content hidden">
+                <section class="py-20">
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div
+                            class="rounded-2xl py-10 px-10 xl:py-16 xl:px-20 bg-gray-50 flex items-center justify-between flex-col gap-16 lg:flex-row">
+                            <div class="w-full lg:w-60">
+                                <h2 class="font-manrope text-4xl font-bold text-gray-900 mb-4 text-center lg:text-left">
+                                    Our Stats
+                                </h2>
+                                <p class="text-sm text-gray-500 leading-6 text-center lg:text-left">
+                                    Statistik penjualan PKK kelas 11 RPL B
+                                </p>
+                            </div>
+                            <div class="w-full lg:w-4/5">
+                                <div class="flex flex-col flex-1 gap-10 lg:gap-0 lg:flex-row lg:justify-between">
+                                    <div class="block">
+                                        <div
+                                            class="font-manrope font-bold text-4xl text-indigo-600 mb-3 text-center lg:text-left">
+                                            260+
+                                        </div>
+                                        <span class="text-gray-900 text-center block lg:text-left">Pesanan
+                                        </span>
+                                    </div>
+                                    <div class="block">
+                                        <div
+                                            class="font-manrope font-bold text-4xl text-indigo-600 mb-3 text-center lg:text-left">
+                                            Rp. 975.000,-
+                                        </div>
+                                        <span class="text-gray-900 text-center block lg:text-left">
+                                            Keuntungan
+                                        </span>
+                                    </div>
+                                    <div class="block">
+                                        <div
+                                            class="font-manrope font-bold text-4xl text-indigo-600 mb-3 text-center lg:text-left">
+                                            72+
+                                        </div>
+                                        <span class="text-gray-900 text-center block lg:text-left">PO terkirim</span>
+                                    </div>
+                                    <div class="block">
+                                        <div
+                                            class="font-manrope font-bold text-4xl text-indigo-600 mb-3 text-center lg:text-left">
+                                            89+
+                                        </div>
+                                        <span class="text-gray-900 text-center block lg:text-left">Orders in
+                                            Queue</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-6">Data Visualization</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Bar Graph -->
+                        <div class="bg-gray-50 p-4 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold mb-4">Bar Graph</h3>
+                            <canvas id="barChart"></canvas>
+                        </div>
+                        <!-- Column Chart -->
+                        <div class="bg-gray-50 p-4 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold mb-4">Horizontal Bar Chart</h3>
+                            <canvas id="columnChart"></canvas>
+                        </div>
+                        <!-- Pie Chart -->
+                        <div class="bg-gray-50 p-4 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold mb-4">Pie Chart</h3>
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <div id="section-5" class="section-content hidden">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4">Sign In</h2>
+                    <p>Sign in content goes here...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile menu functionality
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const sidebar = document.getElementById('sidebar');
+            let isSidebarOpen = false;
+
+            mobileMenuButton.addEventListener('click', () => {
+                isSidebarOpen = !isSidebarOpen;
+                sidebar.classList.toggle('-translate-x-full');
+            });
+
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', (event) => {
+                if (isSidebarOpen &&
+                    !sidebar.contains(event.target) &&
+                    !mobileMenuButton.contains(event.target)) {
+                    isSidebarOpen = false;
+                    sidebar.classList.add('-translate-x-full');
+                }
+            });
+
+            // Section navigation functionality
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('.section-content');
+
+            function showSection(sectionId) {
+                // Hide all sections
+                sections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+
+                // Show selected section
+                const activeSection = document.getElementById(sectionId);
+                if (activeSection) {
+                    activeSection.classList.remove('hidden');
+                }
+
+                // Update nav item styles
+                navItems.forEach(item => {
+                    if (item.dataset.section === sectionId) {
+                        item.classList.add('bg-blue-100', 'text-blue-700');
+                    } else {
+                        item.classList.remove('bg-blue-100', 'text-blue-700');
+                    }
+                });
+            }
+
+            // Add click handlers to nav items
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const sectionId = item.dataset.section;
+                    showSection(sectionId);
+
+                    // Close sidebar on mobile after selection
+                    if (window.innerWidth < 768) {
+                        isSidebarOpen = false;
+                        sidebar.classList.add('-translate-x-full');
+                    }
+                });
+            });
+
+            // Show first section by default
+            showSection('section-1');
+        });
+
+        // Bar Chart
+        const barCtx = document.getElementById('barChart').getContext('2d');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [12, 19, 3, 5, 2],
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: true } }
+            }
+        });
+
+        // Horizontal Bar Chart
+        const columnCtx = document.getElementById('columnChart').getContext('2d');
+        new Chart(columnCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Product A', 'Product B', 'Product C', 'Product D'],
+                datasets: [{
+                    label: 'Revenue',
+                    data: [25, 15, 35, 20],
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y', // Horizontal bar
+                responsive: true,
+                plugins: { legend: { display: true } }
+            }
+        });
+
+        // Pie Chart
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+                datasets: [{
+                    label: 'Population',
+                    data: [12, 15, 8, 5, 10],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'top' } }
+            }
+        });
+    </script>
+</body>
+
+</html>
