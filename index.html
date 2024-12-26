@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="./src/styles/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./src/script/dashboard.js"></script>
 </head>
 
 <body class="bg-gray-100">
@@ -23,7 +24,7 @@
 
                 <nav class="space-y-2">
                     <button data-section="section-1"
-                        class="nav-item w-full flex items-center p-2 rounded-lg transition-colors duration-200 text-white hover:bg-gray-100 hover:text-gray-900 ">
+                        class="nav-item w-full flex items-center p-2 rounded-lg transition-colors duration-200 text-white hover:bg-gray-100 hover:text-gray-900 active:text-gray-900">
                         <i class="fa-brands fa-product-hunt fa-xl"></i>
                         <span class="ml-3">Product</span>
                     </button>
@@ -46,7 +47,13 @@
                         <span class="ml-3">Statistik</span>
                     </button>
 
-                    <button data-section="section-5" onclick="window.open('./src/auth/register.html', '_blank')"
+                    <button data-section="section-5"
+                        class="nav-item w-full flex items-center p-2 rounded-lg transition-colors duration-200 text-white hover:bg-gray-100 hover:text-gray-900">
+                        <i class="fa-solid fa-user fa-xl" style="color: #74C0FC;"></i>
+                        <span class="ml-3">Profile</span>
+                    </button>
+
+                    <button data-section="section-sign-up" onclick="window.open('./src/auth/register.html', '_blank')"
                         class="nav-item w-full flex items-center p-2 rounded-lg transition-colors duration-200 text-white hover:bg-gray-100 hover:text-gray-900">
                         <i class="fa-solid fa-arrow-right-to-bracket" style="color: #B197FC;"></i>
                         <span class="ml-3">Sign In</span>
@@ -68,6 +75,25 @@
                 <section class="container mx-auto">
                     <div class="bg-white rounded-xl shadow-[8px_8px_16px_#d1d1d1,_-8px_-8px_16px_#ffffff] p-6">
                         <h2 class="text-2xl font-bold mb-6 text-gray-800">Daftar Produk</h2>
+                        <form class="max-w-md ">
+                            <label for="default-search"
+                                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                    </svg>
+                                </div>
+                                <input type="search" id="default-search"
+                                    class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Search inventory store / id product ..." required />
+                                <button type="submit"
+                                    class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+                            </div>
+                        </form>
+
                         <div class="overflow-x-auto">
                             <table class="w-full">
                                 <thead>
@@ -91,16 +117,20 @@
                                         </td>
                                         <td class="py-4 px-4">
                                             <div class="flex items-center space-x-2">
-                                                <button class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-600">-</button>
-                                                <input type="number" value="0" min="0" class="w-16 h-8 text-center rounded-lg bg-gray-100 shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] outline-none">
-                                                <button class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-600">+</button>
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-600">-</button>
+                                                <input type="number" value="0" min="0"
+                                                    class="w-16 h-8 text-center rounded-lg bg-gray-100 shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] outline-none">
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-600">+</button>
                                             </div>
                                         </td>
                                         <td class="py-4 px-4">
-                                            <button class="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] transition-all">Tambah</button>
+                                            <button
+                                                class="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] transition-all">Tambah</button>
                                         </td>
                                     </tr>
-            
+
                                     <!-- Product 2 -->
                                     <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                                         <td class="py-4 px-4 text-gray-800 font-medium">PRD002</td>
@@ -111,16 +141,20 @@
                                         </td>
                                         <td class="py-4 px-4">
                                             <div class="flex items-center space-x-2">
-                                                <button disabled class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-400">-</button>
-                                                <input type="number" value="0" min="0" disabled class="w-16 h-8 text-center rounded-lg bg-gray-100 shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] outline-none text-gray-400">
-                                                <button disabled class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-400">+</button>
+                                                <button disabled
+                                                    class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-400">-</button>
+                                                <input type="number" value="0" min="0" disabled
+                                                    class="w-16 h-8 text-center rounded-lg bg-gray-100 shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] outline-none text-gray-400">
+                                                <button disabled
+                                                    class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-400">+</button>
                                             </div>
                                         </td>
                                         <td class="py-4 px-4">
-                                            <button disabled class="px-4 py-2 rounded-lg bg-gray-300 text-gray-500 cursor-not-allowed shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] transition-all">Tambah</button>
+                                            <button disabled
+                                                class="px-4 py-2 rounded-lg bg-gray-300 text-gray-500 cursor-not-allowed shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] transition-all">Tambah</button>
                                         </td>
                                     </tr>
-            
+
                                     <!-- Product 3 -->
                                     <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                                         <td class="py-4 px-4 text-gray-800 font-medium">PRD003</td>
@@ -131,16 +165,20 @@
                                         </td>
                                         <td class="py-4 px-4">
                                             <div class="flex items-center space-x-2">
-                                                <button class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-600">-</button>
-                                                <input type="number" value="0" min="0" class="w-16 h-8 text-center rounded-lg bg-gray-100 shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] outline-none">
-                                                <button class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-600">+</button>
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-600">-</button>
+                                                <input type="number" value="0" min="0"
+                                                    class="w-16 h-8 text-center rounded-lg bg-gray-100 shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] outline-none">
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-600">+</button>
                                             </div>
                                         </td>
                                         <td class="py-4 px-4">
-                                            <button class="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] transition-all">Tambah</button>
+                                            <button
+                                                class="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] transition-all">Tambah</button>
                                         </td>
                                     </tr>
-            
+
                                     <!-- Product 4 -->
                                     <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                                         <td class="py-4 px-4 text-gray-800 font-medium">PRD004</td>
@@ -151,13 +189,17 @@
                                         </td>
                                         <td class="py-4 px-4">
                                             <div class="flex items-center space-x-2">
-                                                <button class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-600">-</button>
-                                                <input type="number" value="0" min="0" class="w-16 h-8 text-center rounded-lg bg-gray-100 shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] outline-none">
-                                                <button class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-600">+</button>
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-600">-</button>
+                                                <input type="number" value="0" min="0"
+                                                    class="w-16 h-8 text-center rounded-lg bg-gray-100 shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] outline-none">
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-gray-100 shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] hover:shadow-[2px_2px_4px_#d1d1d1,_-2px_-2px_4px_#ffffff] active:shadow-[inset_2px_2px_4px_#d1d1d1,_inset_-2px_-2px_4px_#ffffff] transition-all text-gray-600">+</button>
                                             </div>
                                         </td>
                                         <td class="py-4 px-4">
-                                            <button class="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] transition-all">Tambah</button>
+                                            <button
+                                                class="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-[3px_3px_6px_#d1d1d1,_-3px_-3px_6px_#ffffff] transition-all">Tambah</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -165,7 +207,7 @@
                         </div>
                     </div>
                 </section>
-            
+
             </div>
 
             <div id="section-2" class="section-content hidden">
@@ -511,7 +553,7 @@
                 <section class="py-20">
                     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div
-                            class="rounded-2xl py-10 px-10 xl:py-16 xl:px-20 bg-gray-50 flex items-center justify-between flex-col gap-16 lg:flex-row">
+                            class="rounded-2xl py-10 px-10 xl:py-16 xl:px-20 bg-gray-50 flex items-center justify-between flex-col gap-16 lg:flex-row shadow-lg">
                             <div class="w-full lg:w-60">
                                 <h2 class="font-manrope text-4xl font-bold text-gray-900 mb-4 text-center lg:text-left">
                                     Our Stats
@@ -584,6 +626,78 @@
             </div>
 
             <div id="section-5" class="section-content hidden">
+                <section class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6">
+                        <!-- Profile Picture -->
+                        <div class="relative w-32 h-32 mx-auto mb-6">
+                            <img src="https://via.placeholder.com/128" alt="Profile"
+                                class="w-full h-full rounded-full object-cover">
+                            <button
+                                class="absolute bottom-0 right-0 bg-blue-500 p-2 rounded-full text-white hover:bg-blue-600 transition-colors">
+                                <i class="fas fa-pencil-alt text-sm"></i>
+                            </button>
+                        </div>
+
+                        <!-- Form -->
+                        <form method="post | get" class="space-y-6">
+                            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                                <!-- NISN -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">NISN</label>
+                                    <input type="text" value="1234567890" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm 
+                                                  focus:border-blue-500 focus:ring-blue-500 
+                                                  disabled:bg-gray-50 disabled:text-gray-500" disabled>
+                                </div>
+
+                                <!-- Nama -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Nama</label>
+                                    <input type="text" value="John Doe" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm 
+                                                  focus:border-blue-500 focus:ring-blue-500 
+                                                  disabled:bg-gray-50 disabled:text-gray-500" disabled>
+                                </div>
+
+                                <!-- Tanggal Lahir -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
+                                    <input type="date" value="2000-01-01" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm 
+                                                  focus:border-blue-500 focus:ring-blue-500 
+                                                  disabled:bg-gray-50 disabled:text-gray-500" disabled>
+                                </div>
+
+                                <!-- Nama Kelompok -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Nama Kelompok</label>
+                                    <input type="text" value="Kelompok A" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm 
+                                                  focus:border-blue-500 focus:ring-blue-500 
+                                                  disabled:bg-gray-50 disabled:text-gray-500" disabled>
+                                </div>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="flex justify-end space-x-4">
+                                <button type="button" id="editButton" class="inline-flex items-center px-4 py-2 border border-transparent 
+                                               rounded-md shadow-sm text-sm font-medium text-white 
+                                               bg-blue-500 hover:bg-blue-600 focus:outline-none 
+                                               focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    <i class="fas fa-pencil-alt mr-2"></i>
+                                    Edit
+                                </button>
+                                <button type="submit" id="submitButton" class="inline-flex items-center px-4 py-2 border 
+                                               border-transparent rounded-md shadow-sm text-sm 
+                                               font-medium text-white bg-green-500 hover:bg-green-600 
+                                               focus:outline-none focus:ring-2 focus:ring-offset-2 
+                                               focus:ring-green-500">
+                                    <i class="fas fa-check mr-2"></i>
+                                    Submit
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+
+            <div id="section-sign-up" class="section-content hidden">
                 <div class="bg-white p-6 rounded-lg shadow">
                     <h2 class="text-2xl font-bold mb-4">Sign In</h2>
                     <p>Sign in content goes here...</p>
@@ -593,143 +707,84 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Mobile menu functionality
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const sidebar = document.getElementById('sidebar');
-            let isSidebarOpen = false;
 
-            mobileMenuButton.addEventListener('click', () => {
-                isSidebarOpen = !isSidebarOpen;
-                sidebar.classList.toggle('-translate-x-full');
-            });
-
-            // Close sidebar when clicking outside on mobile
-            document.addEventListener('click', (event) => {
-                if (isSidebarOpen &&
-                    !sidebar.contains(event.target) &&
-                    !mobileMenuButton.contains(event.target)) {
-                    isSidebarOpen = false;
-                    sidebar.classList.add('-translate-x-full');
-                }
-            });
-
-            // Section navigation functionality
-            const navItems = document.querySelectorAll('.nav-item');
-            const sections = document.querySelectorAll('.section-content');
-
-            function showSection(sectionId) {
-                // Hide all sections
-                sections.forEach(section => {
-                    section.classList.add('hidden');
-                });
-
-                // Show selected section
-                const activeSection = document.getElementById(sectionId);
-                if (activeSection) {
-                    activeSection.classList.remove('hidden');
-                }
-
-                // Update nav item styles
-                navItems.forEach(item => {
-                    if (item.dataset.section === sectionId) {
-                        item.classList.add('bg-blue-100', 'text-blue-700');
-                    } else {
-                        item.classList.remove('bg-blue-100', 'text-blue-700');
-                    }
-                });
-            }
-
-            // Add click handlers to nav items
-            navItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    const sectionId = item.dataset.section;
-                    showSection(sectionId);
-
-                    // Close sidebar on mobile after selection
-                    if (window.innerWidth < 768) {
-                        isSidebarOpen = false;
-                        sidebar.classList.add('-translate-x-full');
-                    }
-                });
-            });
-
-            // Show first section by default
-            showSection('section-1');
-        });
-
-        // Bar Chart
-        const barCtx = document.getElementById('barChart').getContext('2d');
+        // dummy chart
+        const barCtx = document.getElementById("barChart").getContext("2d");
         new Chart(barCtx, {
-            type: 'bar',
+            type: "bar",
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May'],
-                datasets: [{
-                    label: 'Sales',
-                    data: [12, 19, 3, 5, 2],
-                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
+                labels: ["January", "February", "March", "April", "May"],
+                datasets: [
+                    {
+                        label: "Sales",
+                        data: [12, 19, 3, 5, 2],
+                        backgroundColor: "rgba(54, 162, 235, 0.5)",
+                        borderColor: "rgba(54, 162, 235, 1)",
+                        borderWidth: 1,
+                    },
+                ],
             },
             options: {
                 responsive: true,
-                plugins: { legend: { display: true } }
-            }
+                plugins: { legend: { display: true } },
+            },
         });
 
-        // Horizontal Bar Chart
-        const columnCtx = document.getElementById('columnChart').getContext('2d');
+        const columnCtx = document.getElementById("columnChart").getContext("2d");
         new Chart(columnCtx, {
-            type: 'bar',
+            type: "bar",
             data: {
-                labels: ['Product A', 'Product B', 'Product C', 'Product D'],
-                datasets: [{
-                    label: 'Revenue',
-                    data: [25, 15, 35, 20],
-                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
+                labels: ["Product A", "Product B", "Product C", "Product D"],
+                datasets: [
+                    {
+                        label: "Revenue",
+                        data: [25, 15, 35, 20],
+                        backgroundColor: "rgba(75, 192, 192, 0.5)",
+                        borderColor: "rgba(75, 192, 192, 1)",
+                        borderWidth: 1,
+                    },
+                ],
             },
             options: {
-                indexAxis: 'y', // Horizontal bar
+                indexAxis: "y",
                 responsive: true,
-                plugins: { legend: { display: true } }
-            }
+                plugins: { legend: { display: true } },
+            },
         });
 
-        // Pie Chart
-        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        const pieCtx = document.getElementById("pieChart").getContext("2d");
         new Chart(pieCtx, {
-            type: 'pie',
+            type: "pie",
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
-                datasets: [{
-                    label: 'Population',
-                    data: [12, 15, 8, 5, 10],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.5)',
-                        'rgba(54, 162, 235, 0.5)',
-                        'rgba(255, 206, 86, 0.5)',
-                        'rgba(75, 192, 192, 0.5)',
-                        'rgba(153, 102, 255, 0.5)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)'
-                    ],
-                    borderWidth: 1
-                }]
+                labels: ["Red", "Blue", "Yellow", "Green", "Purple"],
+                datasets: [
+                    {
+                        label: "Population",
+                        data: [12, 15, 8, 5, 10],
+                        backgroundColor: [
+                            "rgba(255, 99, 132, 0.5)",
+                            "rgba(54, 162, 235, 0.5)",
+                            "rgba(255, 206, 86, 0.5)",
+                            "rgba(75, 192, 192, 0.5)",
+                            "rgba(153, 102, 255, 0.5)",
+                        ],
+                        borderColor: [
+                            "rgba(255, 99, 132, 1)",
+                            "rgba(54, 162, 235, 1)",
+                            "rgba(255, 206, 86, 1)",
+                            "rgba(75, 192, 192, 1)",
+                            "rgba(153, 102, 255, 1)",
+                        ],
+                        borderWidth: 1,
+                    },
+                ],
             },
             options: {
                 responsive: true,
-                plugins: { legend: { position: 'top' } }
-            }
+                plugins: { legend: { position: "top" } },
+            },
         });
+
     </script>
 </body>
 
