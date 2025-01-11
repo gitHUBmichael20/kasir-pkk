@@ -7,7 +7,6 @@
     <title>Dashboard Admin</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./src/styles/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
     <script src="./src/script/dashboard.js"></script>
 </head>
 
@@ -42,12 +41,6 @@
                     </button>
 
                     <button data-section="section-4"
-                        class="nav-item w-full flex items-center p-2 rounded-lg transition-colors duration-200 text-white hover:bg-gray-100 hover:text-gray-900">
-                        <i class="fa-solid fa-chart-simple fa-xl" style="color: #FFD43B;"></i>
-                        <span class="ml-3">Statistik</span>
-                    </button>
-
-                    <button data-section="section-5"
                         class="nav-item w-full flex items-center p-2 rounded-lg transition-colors duration-200 text-white hover:bg-gray-100 hover:text-gray-900">
                         <i class="fa-solid fa-user fa-xl" style="color: #74C0FC;"></i>
                         <span class="ml-3">Profile</span>
@@ -86,82 +79,6 @@
             </div>
 
             <div id="section-4" class="section-content hidden">
-                <section class="py-20">
-                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div
-                            class="rounded-2xl py-10 px-10 xl:py-16 xl:px-20 bg-gray-50 flex items-center justify-between flex-col gap-16 lg:flex-row shadow-lg">
-                            <div class="w-full lg:w-60">
-                                <h2 class="font-manrope text-4xl font-bold text-gray-900 mb-4 text-center lg:text-left">
-                                    Our Stats
-                                </h2>
-                                <p class="text-sm text-gray-500 leading-6 text-center lg:text-left">
-                                    Statistik penjualan PKK kelas 11 RPL B
-                                </p>
-                            </div>
-                            <div class="w-full lg:w-4/5">
-                                <div class="flex flex-col flex-1 gap-10 lg:gap-0 lg:flex-row lg:justify-between">
-                                    <div class="block">
-                                        <div
-                                            class="font-manrope font-bold text-4xl text-indigo-600 mb-3 text-center lg:text-left">
-                                            260+
-                                        </div>
-                                        <span class="text-gray-900 text-center block lg:text-left">Pesanan
-                                        </span>
-                                    </div>
-                                    <div class="block">
-                                        <div
-                                            class="font-manrope font-bold text-4xl text-indigo-600 mb-3 text-center lg:text-left">
-                                            Rp. 975.000,-
-                                        </div>
-                                        <span class="text-gray-900 text-center block lg:text-left">
-                                            Keuntungan
-                                        </span>
-                                    </div>
-                                    <div class="block">
-                                        <div
-                                            class="font-manrope font-bold text-4xl text-indigo-600 mb-3 text-center lg:text-left">
-                                            72+
-                                        </div>
-                                        <span class="text-gray-900 text-center block lg:text-left">PO terkirim</span>
-                                    </div>
-                                    <div class="block">
-                                        <div
-                                            class="font-manrope font-bold text-4xl text-indigo-600 mb-3 text-center lg:text-left">
-                                            89+
-                                        </div>
-                                        <span class="text-gray-900 text-center block lg:text-left">Orders in
-                                            Queue</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="bg-white p-6 rounded-lg shadow">
-                    <h2 class="text-2xl font-bold mb-6">Data Visualization</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <!-- Bar Graph -->
-                        <div class="bg-gray-50 p-4 rounded-lg shadow">
-                            <h3 class="text-lg font-semibold mb-4">Bar Graph</h3>
-                            <canvas id="barChart"></canvas>
-                        </div>
-                        <!-- Column Chart -->
-                        <div class="bg-gray-50 p-4 rounded-lg shadow">
-                            <h3 class="text-lg font-semibold mb-4">Horizontal Bar Chart</h3>
-                            <canvas id="columnChart"></canvas>
-                        </div>
-                        <!-- Pie Chart -->
-                        <div class="bg-gray-50 p-4 rounded-lg shadow">
-                            <h3 class="text-lg font-semibold mb-4">Pie Chart</h3>
-                            <canvas id="pieChart"></canvas>
-                        </div>
-                    </div>
-                </section>
-
-            </div>
-
-            <div id="section-5" class="section-content hidden">
                 <section class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
                     <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6">
                         <!-- Profile Picture -->
@@ -243,84 +160,18 @@
     </div>
 
     <script>
+        function openUpdateModal(id, name, price, stock, type) {
+            document.getElementById('modalIdProduct').value = id;
+            document.getElementById('modalName').value = name;
+            document.getElementById('modalPrice').value = price;
+            document.getElementById('modalStock').value = stock;
+            document.getElementById('modalType').value = type;
+            document.getElementById('updateModal').classList.remove('hidden');
+        }
 
-        // dummy chart
-        const barCtx = document.getElementById("barChart").getContext("2d");
-        new Chart(barCtx, {
-            type: "bar",
-            data: {
-                labels: ["January", "February", "March", "April", "May"],
-                datasets: [
-                    {
-                        label: "Sales",
-                        data: [12, 19, 3, 5, 2],
-                        backgroundColor: "rgba(54, 162, 235, 0.5)",
-                        borderColor: "rgba(54, 162, 235, 1)",
-                        borderWidth: 1,
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { display: true } },
-            },
-        });
-
-        const columnCtx = document.getElementById("columnChart").getContext("2d");
-        new Chart(columnCtx, {
-            type: "bar",
-            data: {
-                labels: ["Product A", "Product B", "Product C", "Product D"],
-                datasets: [
-                    {
-                        label: "Revenue",
-                        data: [25, 15, 35, 20],
-                        backgroundColor: "rgba(75, 192, 192, 0.5)",
-                        borderColor: "rgba(75, 192, 192, 1)",
-                        borderWidth: 1,
-                    },
-                ],
-            },
-            options: {
-                indexAxis: "y",
-                responsive: true,
-                plugins: { legend: { display: true } },
-            },
-        });
-
-        const pieCtx = document.getElementById("pieChart").getContext("2d");
-        new Chart(pieCtx, {
-            type: "pie",
-            data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple"],
-                datasets: [
-                    {
-                        label: "Population",
-                        data: [12, 15, 8, 5, 10],
-                        backgroundColor: [
-                            "rgba(255, 99, 132, 0.5)",
-                            "rgba(54, 162, 235, 0.5)",
-                            "rgba(255, 206, 86, 0.5)",
-                            "rgba(75, 192, 192, 0.5)",
-                            "rgba(153, 102, 255, 0.5)",
-                        ],
-                        borderColor: [
-                            "rgba(255, 99, 132, 1)",
-                            "rgba(54, 162, 235, 1)",
-                            "rgba(255, 206, 86, 1)",
-                            "rgba(75, 192, 192, 1)",
-                            "rgba(153, 102, 255, 1)",
-                        ],
-                        borderWidth: 1,
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { position: "top" } },
-            },
-        });
-
+        function closeUpdateModal() {
+            document.getElementById('updateModal').classList.add('hidden');
+        }
     </script>
 </body>
 

@@ -2,37 +2,54 @@
 // Include your database connection
 include './services/database.php'; // Ensure this path is correct
 
+// Handle form submission for update
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_product'])) {
+    $id_product = $_POST['id_product'];
+    $name = $_POST['name'];
+    $price = $_POST['price'];
+    $stock = $_POST['stock'];
+    $type = $_POST['type'];
+
+    // Update query
+    $sql_update = "UPDATE product SET NAME = ?, PRICE = ?, STOCK = ?, TYPE = ? WHERE ID_PRODUCT = ?";
+    $stmt = $conn->prepare($sql_update);
+    $stmt->bind_param("sssss", $name, $price, $stock, $type, $id_product);
+
+    if ($stmt->execute()) {
+        echo "<script>alert('Product updated successfully!');</script>";
+    } else {
+        echo "<script>alert('Failed to update product: " . $conn->error . "');</script>";
+    }
+}
+
+// Handle form submission for deletion (existing)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_product'])) {
+    $id_product = $_POST['id_product'];
+
+    // Delete query
+    $sql_delete = "DELETE FROM product WHERE ID_PRODUCT = ?";
+    $stmt = $conn->prepare($sql_delete);
+    $stmt->bind_param("s", $id_product);
+
+    if ($stmt->execute()) {
+        exit();
+    } else {
+        echo "Error: " . $conn->error;
+    }
+}
+
 // Fetch data from the database
 $sql = "SELECT ID_PRODUCT, NAME, STOCK, PRICE, TYPE FROM product";
 $result = $conn->query($sql);
 
 if (!$result) {
-    die("Error: " . $conn->error); // Add error handling for the query
+    die("Error: " . $conn->error);
 }
 ?>
 
 <section class="container mx-auto">
     <div class="bg-white rounded-xl shadow-[8px_8px_16px_#d1d1d1,_-8px_-8px_16px_#ffffff] p-6">
         <h2 class="text-2xl font-bold mb-6 text-gray-800">Daftar Produk</h2>
-        <form class="max-w-md ">
-            <label for="default-search"
-                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-            <div class="relative">
-                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                    </svg>
-                </div>
-                <input type="search" id="default-search"
-                    class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Search inventory store / id product ..." required />
-                <button type="submit"
-                    class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
-            </div>
-        </form>
-
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
@@ -59,13 +76,17 @@ if (!$result) {
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-600"><?= htmlspecialchars($row['STOCK']); ?></td>
                                 <td class="px-4 py-2">
-                                    <button
-                                        class="<?= $row['STOCK'] > 0
-                                                    ? 'bg-blue-500 text-black px-4 py-2 rounded hover:bg-blue-600'
-                                                    : 'bg-gray-400 text-black px-4 py-2 rounded cursor-not-allowed'; ?>"
-                                        <?= $row['STOCK'] > 0 ? '' : 'disabled'; ?>>
-                                        Add to Cart
+                                    <!-- Button to trigger the update modal -->
+                                    <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="openUpdateModal(<?= $row['ID_PRODUCT']; ?>, '<?= htmlspecialchars($row['NAME']); ?>', <?= $row['PRICE']; ?>, <?= $row['STOCK']; ?>, '<?= htmlspecialchars($row['TYPE']); ?>')">
+                                        Update
                                     </button>
+                                    <!-- Form untuk delete -->
+                                    <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                        <input type="hidden" name="id_product" value="<?= htmlspecialchars($row['ID_PRODUCT']); ?>">
+                                        <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded hover:bg-red-600">
+                                            Delete
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -77,8 +98,42 @@ if (!$result) {
                         </tr>
                     <?php endif; ?>
                 </tbody>
-
             </table>
         </div>
     </div>
 </section>
+
+<!-- Modal Update Product -->
+<div id="updateModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-xl w-1/3">
+        <h2 class="text-xl font-bold mb-4">Update Product</h2>
+        <form method="POST" id="updateForm">
+            <input type="hidden" name="id_product" id="modalIdProduct">
+            <div class="mb-4">
+                <label for="modalName" class="block text-gray-700">Product Name</label>
+                <input type="text" id="modalName" name="name" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="modalPrice" class="block text-gray-700">Price</label>
+                <input type="number" id="modalPrice" name="price" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="modalStock" class="block text-gray-700">Stock</label>
+                <input type="number" id="modalStock" name="stock" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="modalType" class="block text-gray-700">Product Type</label>
+                <select id="modalType" name="type" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" required>
+                    <option value="elektronik">Elektronik</option>
+                    <option value="makanan">Makanan</option>
+                    <option value="minuman">Minuman</option>
+                </select>
+            </div>
+            <div class="flex justify-end gap-4 mt-6">
+                <button type="button" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 focus:outline-none" onclick="closeUpdateModal()">Cancel</button>
+                <button type="submit" name="update_product" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+

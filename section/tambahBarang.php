@@ -4,12 +4,12 @@ include('./services/database.php');
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nama = $_POST['nama'];
-    $kode = $_POST['kode'];
     $harga = $_POST['harga'];
     $kuantitas = $_POST['kuantitas'];
     $tipe = $_POST['tipe'];
 
-    $sql = "INSERT INTO product (NAME, ID_PRODUCT, PRICE, STOCK, TYPE) VALUES ('$nama', '$kode', '$harga', '$kuantitas', '$tipe')";
+    // Remove ID_PRODUCT from the SQL query if it's no longer required
+    $sql = "INSERT INTO product (NAME, PRICE, STOCK, TYPE) VALUES ('$nama', '$harga', '$kuantitas', '$tipe')";
     if (mysqli_query($conn, $sql)) {
         echo "<script>alert('Product added successfully!');</script>";
     } else {
@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
+
 
 <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-xl p-6 m-20">
     <h2 class="text-2xl font-bold mb-6">Form Produk</h2>
@@ -29,15 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     Nama Barang
                 </label>
                 <input type="text" id="nama" name="nama"
-                    class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" required>
-            </div>
-
-            <!-- Kode Barang -->
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="kode">
-                    Kode Barang
-                </label>
-                <input type="text" id="kode" name="kode"
                     class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" required>
             </div>
 
