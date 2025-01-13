@@ -39,18 +39,6 @@
                         <i class="fa-solid fa-comment" style="color: #B197FC;"></i>
                         <span class="ml-3">Inbox</span>
                     </button>
-
-                    <button data-section="section-4"
-                        class="nav-item w-full flex items-center p-2 rounded-lg transition-colors duration-200 text-white hover:bg-gray-100 hover:text-gray-900">
-                        <i class="fa-solid fa-user fa-xl" style="color: #74C0FC;"></i>
-                        <span class="ml-3">Profile</span>
-                    </button>
-
-                    <button data-section="section-sign-up" onclick="window.open('./src/auth/register.html', '_blank')"
-                        class="nav-item w-full flex items-center p-2 rounded-lg transition-colors duration-200 text-white hover:bg-gray-100 hover:text-gray-900">
-                        <i class="fa-solid fa-arrow-right-to-bracket" style="color: #B197FC;"></i>
-                        <span class="ml-3">Sign In</span>
-                    </button>
                 </nav>
             </div>
         </aside>
@@ -76,85 +64,6 @@
 
             <div id="section-3" class="section-content hidden">
                 <?php include('./section/inbox.php') ?>
-            </div>
-
-            <div id="section-4" class="section-content hidden">
-                <section class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-                    <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6">
-                        <!-- Profile Picture -->
-                        <div class="relative w-32 h-32 mx-auto mb-6">
-                            <img src="https://via.placeholder.com/128" alt="Profile"
-                                class="w-full h-full rounded-full object-cover">
-                            <button
-                                class="absolute bottom-0 right-0 bg-blue-500 p-2 rounded-full text-white hover:bg-blue-600 transition-colors">
-                                <i class="fas fa-pencil-alt text-sm"></i>
-                            </button>
-                        </div>
-
-                        <!-- Form -->
-                        <form method="post | get" class="space-y-6">
-                            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                                <!-- NISN -->
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700">NISN</label>
-                                    <input type="text" value="1234567890" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm 
-                                                  focus:border-blue-500 focus:ring-blue-500 
-                                                  disabled:bg-gray-50 disabled:text-gray-500" disabled>
-                                </div>
-
-                                <!-- Nama -->
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700">Nama</label>
-                                    <input type="text" value="John Doe" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm 
-                                                  focus:border-blue-500 focus:ring-blue-500 
-                                                  disabled:bg-gray-50 disabled:text-gray-500" disabled>
-                                </div>
-
-                                <!-- Tanggal Lahir -->
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
-                                    <input type="date" value="2000-01-01" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm 
-                                                  focus:border-blue-500 focus:ring-blue-500 
-                                                  disabled:bg-gray-50 disabled:text-gray-500" disabled>
-                                </div>
-
-                                <!-- Nama Kelompok -->
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700">Nama Kelompok</label>
-                                    <input type="text" value="Kelompok A" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm 
-                                                  focus:border-blue-500 focus:ring-blue-500 
-                                                  disabled:bg-gray-50 disabled:text-gray-500" disabled>
-                                </div>
-                            </div>
-
-                            <!-- Buttons -->
-                            <div class="flex justify-end space-x-4">
-                                <button type="button" id="editButton" class="inline-flex items-center px-4 py-2 border border-transparent 
-                                               rounded-md shadow-sm text-sm font-medium text-white 
-                                               bg-blue-500 hover:bg-blue-600 focus:outline-none 
-                                               focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                    <i class="fas fa-pencil-alt mr-2"></i>
-                                    Edit
-                                </button>
-                                <button type="submit" id="submitButton" class="inline-flex items-center px-4 py-2 border 
-                                               border-transparent rounded-md shadow-sm text-sm 
-                                               font-medium text-white bg-green-500 hover:bg-green-600 
-                                               focus:outline-none focus:ring-2 focus:ring-offset-2 
-                                               focus:ring-green-500">
-                                    <i class="fas fa-check mr-2"></i>
-                                    Submit
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </section>
-            </div>
-
-            <div id="section-sign-up" class="section-content hidden">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h2 class="text-2xl font-bold mb-4">Sign In</h2>
-                    <p>Sign in content goes here...</p>
-                </div>
             </div>
         </main>
     </div>
