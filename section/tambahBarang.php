@@ -12,12 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql = "INSERT INTO product (NAME, PRICE, STOCK, TYPE) VALUES ('$nama', '$harga', '$kuantitas', '$tipe')";
     if (mysqli_query($conn, $sql)) {
         echo "<script>alert('Product added successfully!');</script>";
+        // Refresh page after 3 seconds
+        echo "<meta http-equiv='refresh' content='1'>";
     } else {
         echo "<script>alert('Failed to add product: " . mysqli_error($conn) . "');</script>";
     }
 }
 
 ?>
+
 
 
 <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-xl p-6 m-20">
@@ -59,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <select id="tipe" name="tipe"
                     class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" required>
                     <option value="">Pilih Tipe Barang</option>
-                    <option value="elektronik">Minuman</option>
+                    <option value="minuman">Minuman</option>
                     <option value="makanan">Makanan</option>
                 </select>
             </div>
