@@ -1,6 +1,6 @@
 <?php
 // Include your database connection
-include './services/database.php'; // Ensure this path is correct
+include './services/database.php';
 
 // Handle form submission for update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_product'])) {
@@ -10,31 +10,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_product'])) {
     $stock = $_POST['stock'];
     $type = $_POST['type'];
 
-    // Update query
-    $sql_update = "UPDATE product SET NAME = ?, PRICE = ?, STOCK = ?, TYPE = ? WHERE ID_PRODUCT = ?";
-    $stmt = $conn->prepare($sql_update);
-    $stmt->bind_param("sssss", $name, $price, $stock, $type, $id_product);
-
-    if ($stmt->execute()) {
-        echo "<script>alert('Product updated successfully!');</script>";
+    // Validasi input
+    if (empty($id_product) || empty($name) || !is_numeric($price) || !is_numeric($stock) || empty($type)) {
+        echo "<script>alert('Invalid input data.');</script>";
     } else {
-        echo "<script>alert('Failed to update product: " . $conn->error . "');</script>";
+        // Update query
+        $sql_update = "UPDATE product SET NAME = ?, PRICE = ?, STOCK = ?, TYPE = ? WHERE ID_PRODUCT = ?";
+        $stmt = $conn->prepare($sql_update);
+        
+        // Change bind_param types to match your data types
+        $stmt->bind_param("siiss", $name, $price, $stock, $type, $id_product);
+
+        if ($stmt->execute()) {
+            echo "<script>
+                alert('Product updated successfully!');
+                window.location.href = '" . $_SERVER['PHP_SELF'] . "';
+            </script>";
+            exit();
+        } else {
+            echo "<script>alert('Failed to update product: " . $conn->error . "');</script>";
+        }
+        $stmt->close();
     }
 }
 
-// Handle form submission for deletion (existing)
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_product'])) {
+// Handle form submission for deletion - Menambahkan pengecekan untuk delete_product
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_product']) && isset($_POST['id_product'])) {
     $id_product = $_POST['id_product'];
 
-    // Delete query
-    $sql_delete = "DELETE FROM product WHERE ID_PRODUCT = ?";
-    $stmt = $conn->prepare($sql_delete);
-    $stmt->bind_param("s", $id_product);
-
-    if ($stmt->execute()) {
-        exit();
+    // Validasi ID produk
+    if (empty($id_product)) {
+        echo "Error: Invalid product ID.";
     } else {
-        echo "Error: " . $conn->error;
+        // Delete query
+        $sql_delete = "DELETE FROM product WHERE ID_PRODUCT = ?";
+        $stmt = $conn->prepare($sql_delete);
+        $stmt->bind_param("s", $id_product);
+
+        if ($stmt->execute()) {
+            echo "<script>alert('Product deleted successfully!');</script>";
+            // Redirect or refresh the page
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
+        } else {
+            echo "Error: " . $conn->error;
+        }
+        $stmt->close();
     }
 }
 
@@ -81,12 +102,12 @@ if (!$result) {
                                     <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="openUpdateModal(<?= $row['ID_PRODUCT']; ?>, '<?= htmlspecialchars($row['NAME']); ?>', <?= $row['PRICE']; ?>, <?= $row['STOCK']; ?>, '<?= htmlspecialchars($row['TYPE']); ?>')">
                                         Update
                                     </button>
-                                </td>
-                                <!-- Kolom Delete -->
-                                <td class="px-4 py-2">
+                                    <!-- Form untuk delete -->
+                                    <!-- Form untuk delete -->
                                     <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
                                         <input type="hidden" name="id_product" value="<?= htmlspecialchars($row['ID_PRODUCT']); ?>">
-                                        <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded hover:bg-red-600">
+                                        <input type="hidden" name="delete_product" value="1">
+                                        <button type="submit" class="bg-red-500 text-black px-5 py-1 my-1 rounded hover:bg-red-600">
                                             Delete
                                         </button>
                                     </form>
@@ -128,7 +149,7 @@ if (!$result) {
             <div class="mb-4">
                 <label for="modalType" class="block text-gray-700">Product Type</label>
                 <select id="modalType" name="type" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" required>
-                    <option value="elektronik">Elektronik</option>
+                    <option value="">Pilih Tipe Barang</option>
                     <option value="makanan">Makanan</option>
                     <option value="minuman">Minuman</option>
                 </select>
