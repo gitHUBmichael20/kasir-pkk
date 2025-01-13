@@ -77,13 +77,13 @@ if (!$result) {
                                 <td class="px-4 py-2 text-sm text-gray-600"><?= htmlspecialchars($row['STOCK']); ?></td>
                                 <td class="px-4 py-2">
                                     <!-- Button to trigger the update modal -->
-                                    <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="openUpdateModal(<?= $row['ID_PRODUCT']; ?>, '<?= htmlspecialchars($row['NAME']); ?>', <?= $row['PRICE']; ?>, <?= $row['STOCK']; ?>, '<?= htmlspecialchars($row['TYPE']); ?>')">
+                                    <button type="button" class="bg-blue-500 text-white px-4 py-1 my-1 rounded hover:bg-blue-600" onclick="openUpdateModal(<?= $row['ID_PRODUCT']; ?>, '<?= htmlspecialchars($row['NAME']); ?>', <?= $row['PRICE']; ?>, <?= $row['STOCK']; ?>, '<?= htmlspecialchars($row['TYPE']); ?>')">
                                         Update
                                     </button>
                                     <!-- Form untuk delete -->
                                     <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
                                         <input type="hidden" name="id_product" value="<?= htmlspecialchars($row['ID_PRODUCT']); ?>">
-                                        <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded hover:bg-red-600">
+                                        <button type="submit" class="bg-red-500 text-black px-5 py-1 my-1 rounded hover:bg-red-600">
                                             Delete
                                         </button>
                                     </form>
