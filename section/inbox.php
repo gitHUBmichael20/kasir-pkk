@@ -1,52 +1,57 @@
-<div class="max-w-7xl mx-auto">
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-gray-800">Orders List</h2>
-        <span class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-sm">
-            Active Orders
-        </span>
+<div class="p-6 max-w-7xl mx-auto space-y-6">
+    <!-- Header Section -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900">Orders Management</h1>
+            <p class="text-sm text-gray-500 mt-1">Manage and track your orders</p>
+        </div>
+        <button onclick="document.getElementById('addOrderModal').classList.remove('hidden')"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+            </svg>
+            New Order
+        </button>
     </div>
 
-    <!-- Table Container -->
+    <!-- Orders Table -->
     <div class="bg-white rounded-xl shadow-sm overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
-                    <tr class="bg-gray-50">
-                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">ID_PURCHASE</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">ID_PRODUCT</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">BUYER</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">TOTAL_PRICE</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">PURCHASE_TIME</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">STATUS</th>
+                    <tr class="bg-gray-50 border-b border-gray-200">
+                        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
+                        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Buyer</th>
+                        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4">
+                <tbody class="divide-y divide-gray-200">
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center gap-2">
-                                <span class="w-3 h-3 bg-purple-400 rounded-full"></span>
-                                <span class="text-sm text-gray-700">ORD-2025011001</span>
+                                <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+                                <span class="text-sm font-medium text-gray-900">ORD-2025011001</span>
                             </div>
                         </td>
-                        <td class="px-6 py-4">
-                            <span class="text-sm text-gray-700">PRD-NGS001</span>
-                        </td>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center gap-2">
-                                <span class="text-sm text-gray-700">John Doe</span>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4">
-                            <span class="text-sm font-medium text-gray-900">Rp 50.000</span>
-                        </td>
-                        <td class="px-6 py-4">
-                            <span class="text-sm text-gray-600">2025-01-10 08:46:32</span>
-                        </td>
-                        <td class="px-6 py-4">
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">PRD-NGS001</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">John Doe</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Rp 50.000</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-01-10 08:46:32</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                 Completed
                             </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <button class="text-gray-400 hover:text-gray-500">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                                </svg>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -54,105 +59,63 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div id="addPurchaseModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Add New Purchase</h2>
-            <form id="addPurchaseForm" method="POST" action="add_purchase.php">
-                <!-- ID_PRODUCT -->
-                <div class="mb-4">
-                    <label for="id_product" class="block text-sm font-medium text-gray-700">ID Product</label>
-                    <input
-                        type="number"
-                        name="id_product"
-                        id="id_product"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
-                        required>
+    <!-- Add Order Modal -->
+    <div id="addOrderModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md shadow-xl">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-900">Add New Order</h2>
+                <button onclick="document.getElementById('addOrderModal').classList.add('hidden')"
+                    class="text-gray-400 hover:text-gray-500">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Product ID</label>
+                    <input type="text" placeholder="Enter product ID"
+                        class="w-full h-10 rounded-lg border border-gray-300 px-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 </div>
-
-                <!-- BUYER -->
-                <div class="mb-4">
-                    <label for="buyer" class="block text-sm font-medium text-gray-700">Buyer</label>
-                    <input
-                        type="text"
-                        name="buyer"
-                        id="buyer"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
-                        required>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Buyer Name</label>
+                    <input type="text" placeholder="Enter buyer name"
+                        class="w-full h-10 rounded-lg border border-gray-300 px-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 </div>
-
-                <!-- TOTAL_PRICE -->
-                <div class="mb-4">
-                    <label for="total_price" class="block text-sm font-medium text-gray-700">Total Price</label>
-                    <input
-                        type="number"
-                        step="0.01"
-                        name="total_price"
-                        id="total_price"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
-                        required>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Amount</label>
+                    <input type="number" placeholder="Enter amount"
+                        class="w-full h-10 rounded-lg border border-gray-300 px-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 </div>
-
-                <!-- PURCHASE_TIME -->
-                <div class="mb-4">
-                    <label for="purchase_time" class="block text-sm font-medium text-gray-700">Purchase Time</label>
-                    <input
-                        type="datetime-local"
-                        name="purchase_time"
-                        id="purchase_time"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
-                        required>
-                </div>
-
-                <!-- STATUS -->
-                <div class="mb-4">
-                    <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                    <select
-                        name="status"
-                        id="status"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
-                        required>
-                        <option value="Pending">Pending</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Cancelled">Cancelled</option>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                    <select class="w-full h-10 rounded-lg border border-gray-300 px-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
                     </select>
                 </div>
-
-                <!-- Submit and Close Buttons -->
-                <div class="flex justify-end gap-2">
-                    <button
-                        type="button"
-                        class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400"
-                        onclick="closeModal()">
+                <div class="flex justify-end gap-2 mt-6">
+                    <button type="button"
+                        onclick="document.getElementById('addOrderModal').classList.add('hidden')"
+                        class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
                         Cancel
                     </button>
-                    <button
-                        type="submit"
-                        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                        Save
+                    <button type="submit"
+                        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                        Save Order
                     </button>
                 </div>
             </form>
         </div>
     </div>
-
-    <!-- Floating Button -->
-    <button 
-        class="fixed bottom-6 right-6 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition-all focus:outline-none focus:ring-2 focus:ring-blue-300"
-        onclick="openModal()"
-    >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-        </svg>
-    </button>
 </div>
 
 <script>
-    function openModal() {
-        document.getElementById('addPurchaseModal').classList.remove('hidden');
-    }
-
-    function closeModal() {
-        document.getElementById('addPurchaseModal').classList.add('hidden');
-    }
+    // Close modal when clicking outside
+    document.getElementById('addOrderModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.add('hidden');
+        }
+    });
 </script>
