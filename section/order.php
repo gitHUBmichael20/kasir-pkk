@@ -59,7 +59,8 @@ if (!$result) {
                         <th class="py-4 px-4 text-left text-gray-700">Harga</th>
                         <th class="py-4 px-4 text-left text-gray-700">Status</th>
                         <th class="py-4 px-4 text-left text-gray-700">Kuantitas</th>
-                        <th class="py-4 px-4 text-left text-gray-700">Aksi</th>
+                        <th class="py-4 px-4 text-left text-gray-700">Update</th>
+                        <th class="py-4 px-4 text-left text-gray-700">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,12 +76,14 @@ if (!$result) {
                                         : '<span class="text-red-600 font-semibold">Out of Stock</span>'; ?>
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-600"><?= htmlspecialchars($row['STOCK']); ?></td>
+                                <!-- Kolom Update -->
                                 <td class="px-4 py-2">
-                                    <!-- Button to trigger the update modal -->
                                     <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="openUpdateModal(<?= $row['ID_PRODUCT']; ?>, '<?= htmlspecialchars($row['NAME']); ?>', <?= $row['PRICE']; ?>, <?= $row['STOCK']; ?>, '<?= htmlspecialchars($row['TYPE']); ?>')">
                                         Update
                                     </button>
-                                    <!-- Form untuk delete -->
+                                </td>
+                                <!-- Kolom Delete -->
+                                <td class="px-4 py-2">
                                     <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
                                         <input type="hidden" name="id_product" value="<?= htmlspecialchars($row['ID_PRODUCT']); ?>">
                                         <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded hover:bg-red-600">
@@ -92,7 +95,7 @@ if (!$result) {
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="6" class="px-4 py-2 text-center text-gray-500">
+                            <td colspan="7" class="px-4 py-2 text-center text-gray-500">
                                 No products found.
                             </td>
                         </tr>
@@ -102,6 +105,7 @@ if (!$result) {
         </div>
     </div>
 </section>
+
 
 <!-- Modal Update Product -->
 <div id="updateModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center hidden">
@@ -136,4 +140,3 @@ if (!$result) {
         </form>
     </div>
 </div>
-
