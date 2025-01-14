@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_product'])) {
         // Update query
         $sql_update = "UPDATE product SET NAME = ?, PRICE = ?, STOCK = ?, TYPE = ? WHERE ID_PRODUCT = ?";
         $stmt = $conn->prepare($sql_update);
-        
+
         // Change bind_param types to match your data types
         $stmt->bind_param("siiss", $name, $price, $stock, $type, $id_product);
 
@@ -79,7 +79,8 @@ if (!$result) {
                         <th class="py-4 px-4 text-left text-gray-700">Harga</th>
                         <th class="py-4 px-4 text-left text-gray-700">Status</th>
                         <th class="py-4 px-4 text-left text-gray-700">Kuantitas</th>
-                        <th class="py-4 px-4 text-left text-gray-700">Aksi</th>
+                        <th class="py-4 px-4 text-left text-gray-700">Update</th>
+                        <th class="py-4 px-4 text-left text-gray-700">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -100,7 +101,8 @@ if (!$result) {
                                     <button type="button" class="bg-blue-500 text-white px-4 py-1 my-1 rounded hover:bg-blue-600" onclick="openUpdateModal(<?= $row['ID_PRODUCT']; ?>, '<?= htmlspecialchars($row['NAME']); ?>', <?= $row['PRICE']; ?>, <?= $row['STOCK']; ?>, '<?= htmlspecialchars($row['TYPE']); ?>')">
                                         Update
                                     </button>
-                                    <!-- Form untuk delete -->
+                                </td>
+                                <td class="px-4 py-2">
                                     <!-- Form untuk delete -->
                                     <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
                                         <input type="hidden" name="id_product" value="<?= htmlspecialchars($row['ID_PRODUCT']); ?>">
