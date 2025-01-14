@@ -59,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_product']) && 
     }
 }
 
-// Fetch data from the database
 $sql = "SELECT ID_PRODUCT, NAME, STOCK, PRICE, TYPE FROM product";
 $result = $conn->query($sql);
 
