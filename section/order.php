@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_product'])) {
         $sql_update = "UPDATE product SET NAME = ?, PRICE = ?, STOCK = ?, TYPE = ? WHERE ID_PRODUCT = ?";
         $stmt = $conn->prepare($sql_update);
 
-        // Change bind_param types to match your data types
+        // Change bind_param types to match your data typesed
         $stmt->bind_param("siiss", $name, $price, $stock, $type, $id_product);
 
         if ($stmt->execute()) {
@@ -70,6 +70,17 @@ if (!$result) {
 <section class="container mx-auto">
     <div class="bg-white rounded-xl shadow-[8px_8px_16px_#d1d1d1,_-8px_-8px_16px_#ffffff] p-6">
         <h2 class="text-2xl font-bold mb-6 text-gray-800">Daftar Produk</h2>
+        <div class="mb-4">
+        <div class="relative">
+            <input type="text" 
+                   id="searchInput" 
+                   placeholder="Cari produk..." 
+                   class="w-full px-4 py-2 pl-10 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-search text-gray-400"></i>
+            </div>
+        </div>
+    </div>
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
@@ -160,3 +171,22 @@ if (!$result) {
         </form>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    
+    searchInput.addEventListener('keyup', function() {
+        const searchTerm = this.value.toLowerCase();
+        const tableRows = document.querySelectorAll('tbody tr');
+        
+        tableRows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            if(text.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
