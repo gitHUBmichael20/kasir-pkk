@@ -1,10 +1,16 @@
 <?php
     session_start();
 
+    if (!isset($_SESSION["is_login"]) || $_SESSION["is_login"] !== true) {
+        header("Location: ./index.php");
+        exit;
+        }
+
     if(isset($_POST['logout'])) {
         session_unset();
         session_destroy();
-        header('location: index.php');
+        $_SESSION["is_login"] = false;
+        header("Location: ./index.php");
     }
 
 ?>
@@ -27,7 +33,7 @@
         <!-- Sidebar -->
         <aside id="sidebar"
             class="fixed inset-y-0 left-0 z-50 w-64 transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0">
-            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+            <div class="h-full px-3 py-4 overflow-y-auto bg-[#22445c]">
                 <div class="flex items-center mb-5 gap-2">
                     <i class="fa-solid fa-shop fa-xl" style="color: #74C0FC;"></i>
                     <span class="text-xl font-semibold dark:text-white">Dashboard Kasir</span>
@@ -48,7 +54,7 @@
 
                     <a href="section/kasir.php"><button data-section="section-3"
                         class="nav-item w-full flex items-center p-2 rounded-lg transition-colors duration-200 text-white hover:bg-gray-100 hover:text-gray-900">
-                        <i class="fa-solid fa-comment" style="color: #B197FC;"></i>
+                        <i class="fa-solid fa-cart-shopping" style="color: #B197FC;"></i>
                         <span class="ml-3">Pesan</span>
                     </button>
                     </a>
@@ -59,7 +65,7 @@
                         <span class="ml-3">Pendapatan</span>
                     </button>
                     <form action="dashboard.php" method="POST">
-                        <button data-section="section-sign-up" type="submit" name="logout"
+                        <button data-section="section-logout" type="submit" name="logout"
                             class="nav-item w-full flex items-center p-2 rounded-lg transition-colors duration-200 text-white hover:bg-gray-100 hover:text-gray-900">
                             <i class="fa-solid fa-arrow-right-to-bracket" style="color: #B197FC;"></i>
                             <span class="ml-3">Log Out</span>
@@ -83,21 +89,21 @@
             </div>
 
             <div id="section-2" class="section-content hidden">
-                <div class="bg-white p-1 rounded-lg shadow">
+                <div class="bg-white p-1 rounded-lg shadow bg-[url('src/image/blue_bg_brush.png')] bg-cover bg-no-repeat">
                     <?php include('./section/tambahBarang.php') ?>
                 </div>
             </div>
 
             <div id="section-4" class="section-content hidden">
-                <div class="bg-white p-1 rounded-lg shadow">
+                <div class="bg-white p-1 rounded-lg shadow bg-[url('src/image/blue_bg_brush.png')] bg-cover bg-no-repeat">
                     <?php include('./section/pendapatan.php') ?>
                 </div>
             </div>
 
             
 
-            <div id="section-sign-up" class="section-content hidden">
-                <div class="bg-white p-6 rounded-lg shadow">
+            <div id="section-logout" class="section-content hidden">
+                <div class="bg-white p-6 rounded-lg shadow bg-[url('src/image/blue_bg_brush.png')] bg-cover bg-no-repeat">
                     <h2 class="text-2xl font-bold mb-4">Log Out</h2>
                     <p>Sedang proses untuk log out, harap tunggu...</p>
                 </div>

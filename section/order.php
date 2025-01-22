@@ -1,6 +1,11 @@
 <?php
 // Include your database connection
-include './services/database.php';
+include 'services/database.php';
+
+if (!isset($_SESSION["is_login"]) || $_SESSION["is_login"] !== true) {
+    header("Location: /kasir-pkk/index.php");
+    exit;
+    }
 
 // Handle form submission for update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_product'])) {
@@ -68,7 +73,7 @@ if (!$result) {
 ?>
 
 <section class="container mx-auto">
-    <div class="bg-white rounded-xl shadow-[8px_8px_16px_#d1d1d1,_-8px_-8px_16px_#ffffff] p-6">
+    <div class="bg-white bg-[url('src/image/blue_bg_brush.png')] bg-cover bg-no-repeat rounded-xl shadow-[8px_8px_16px_#d1d1d1,_-8px_-8px_16px_#ffffff] p-6 ">
         <h2 class="text-2xl font-bold mb-6 text-gray-800">Daftar Produk</h2>
         <div class="mb-4">
         <div class="relative">
@@ -84,20 +89,20 @@ if (!$result) {
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
-                    <tr class="border-b-2 border-gray-200">
-                        <th class="py-4 px-4 text-left text-gray-700">ID Barang</th>
-                        <th class="py-4 px-4 text-left text-gray-700">Nama Barang</th>
-                        <th class="py-4 px-4 text-left text-gray-700">Harga</th>
-                        <th class="py-4 px-4 text-left text-gray-700">Status</th>
-                        <th class="py-4 px-4 text-left text-gray-700">Kuantitas</th>
-                        <th class="py-4 px-4 text-left text-gray-700">Update</th>
-                        <th class="py-4 px-4 text-left text-gray-700">Delete</th>
+                    <tr class="border-b-2 border-gray-200 bg-blue-500">
+                        <th class="py-4 px-4 text-left text-gray-900">ID Barang</th>
+                        <th class="py-4 px-4 text-left text-gray-900">Nama Barang</th>
+                        <th class="py-4 px-4 text-left text-gray-900">Harga</th>
+                        <th class="py-4 px-4 text-left text-gray-900">Status</th>
+                        <th class="py-4 px-4 text-left text-gray-900">Kuantitas</th>
+                        <th class="py-4 px-4 text-left text-gray-900">Update</th>
+                        <th class="py-4 px-4 text-left text-gray-900">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if ($result->num_rows > 0): ?>
                         <?php while ($row = $result->fetch_assoc()): ?>
-                            <tr class="bg-white border-b hover:bg-gray-100">
+                            <tr class="border-b hover:bg-blue-100 bg-blue-200">
                                 <td class="px-4 py-2 text-sm font-medium text-gray-700"><?= htmlspecialchars($row['ID_PRODUCT']); ?></td>
                                 <td class="px-4 py-2 text-sm text-gray-600"><?= htmlspecialchars($row['NAME']); ?></td>
                                 <td class="px-4 py-2 text-sm text-gray-600">Rp <?= number_format($row['PRICE'], 0, ',', '.'); ?></td>

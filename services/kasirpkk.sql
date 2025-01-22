@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 17 Jan 2025 pada 11.15
--- Versi server: 8.0.30
--- Versi PHP: 8.3.12
+-- Host: localhost:3306
+-- Waktu pembuatan: 21 Jan 2025 pada 14.01
+-- Versi server: 8.0.34
+-- Versi PHP: 8.1.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `kasirpkk`
+-- Database: `satoerpl_kasirpkk`
 --
 
 -- --------------------------------------------------------
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `ID_ADMIN` varchar(20) NOT NULL,
-  `USERNAME_ADMIN` varchar(50) NOT NULL,
-  `PASSWORD` varchar(255) NOT NULL
+  `ID_ADMIN` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `USERNAME_ADMIN` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `PASSWORD` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -48,10 +48,10 @@ INSERT INTO `admin` (`ID_ADMIN`, `USERNAME_ADMIN`, `PASSWORD`) VALUES
 
 CREATE TABLE `product` (
   `ID_PRODUCT` int NOT NULL,
-  `NAME` varchar(100) NOT NULL,
+  `NAME` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `STOCK` int NOT NULL,
   `PRICE` decimal(10,2) NOT NULL,
-  `TYPE` varchar(50) NOT NULL,
+  `TYPE` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -62,7 +62,7 @@ CREATE TABLE `product` (
 INSERT INTO `product` (`ID_PRODUCT`, `NAME`, `STOCK`, `PRICE`, `TYPE`, `created_at`) VALUES
 (1, '⁠Snack Kriuk Putri', 30, 5000.00, 'makanan', '2025-01-13 14:43:18'),
 (2, '⁠Donat Putri', 20, 4000.00, 'makanan', '2025-01-13 14:43:18'),
-(3, 'Kebab Annisa', 20, 7000.00, 'makanan', '2025-01-13 14:43:18'),
+(3, 'Kebab Annisa', 18, 7000.00, 'makanan', '2025-01-13 14:43:18'),
 (4, 'Bakso Mercon Annisa', 25, 10000.00, 'makanan', '2025-01-13 14:43:18'),
 (5, 'Thai Tea Hirto', 20, 7000.00, 'minuman', '2025-01-13 14:43:18'),
 (6, 'Salad Buah Hirto', 12, 15000.00, 'makanan', '2025-01-13 14:43:18'),
@@ -76,7 +76,9 @@ INSERT INTO `product` (`ID_PRODUCT`, `NAME`, `STOCK`, `PRICE`, `TYPE`, `created_
 (14, '⁠Keripik Pisang Lumer Aufa', 12, 5000.00, 'makanan', '2025-01-13 14:43:18'),
 (15, 'Martabak Mie Raynaldo', 12, 7000.00, 'makanan', '2025-01-13 14:43:18'),
 (16, 'Es Milo Raynaldo', 12, 5000.00, 'minuman', '2025-01-13 14:43:18'),
-(17, 'Piscok Kenzie', 10, 3000.00, 'makanan', '2025-01-13 14:43:18');
+(17, 'Piscok Kenzie', 10, 3000.00, 'makanan', '2025-01-13 14:43:18'),
+(29, 'Banana Roll Eryan', 10, 7000.00, 'makanan', '2025-01-21 07:00:04'),
+(30, 'Es Pink Eryan', 10, 5000.00, 'minuman', '2025-01-21 07:00:27');
 
 -- --------------------------------------------------------
 
@@ -143,7 +145,7 @@ ALTER TABLE `transaction_details`
 -- AUTO_INCREMENT untuk tabel `product`
 --
 ALTER TABLE `product`
-  MODIFY `ID_PRODUCT` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `ID_PRODUCT` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT untuk tabel `transactions`
