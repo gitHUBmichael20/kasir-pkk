@@ -2,6 +2,11 @@
 session_start();
 include '../services/database.php';
 
+if (!isset($_SESSION["is_login"]) || $_SESSION["is_login"] !== true) {
+    header("Location: /kasir-pkk/index.php");
+  exit;
+  }
+
 // Inisialisasi keranjang jika belum ada
 if (!isset($_SESSION['keranjang'])) {
     $_SESSION['keranjang'] = [];
@@ -129,7 +134,7 @@ foreach ($_SESSION['keranjang'] as $item) {
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 bg-[url('../src/image/blue_bg_brush.png')] bg-cover bg-no-repeat">
     <div class="container mx-auto px-4 py-8">
         <?php if (isset($_SESSION['pesan'])): ?>
             <div class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative mb-4">

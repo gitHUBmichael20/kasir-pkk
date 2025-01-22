@@ -1,6 +1,11 @@
 <?php
 include 'services/database.php';
 
+if (!isset($_SESSION["is_login"]) || $_SESSION["is_login"] !== true) {
+  header("Location: /kasir-pkk/index.php");
+  exit;
+  }
+
 // Fungsi format rupiah
 function formatRupiah($angka) {
   // Jika nilai null atau 0, kembalikan Rp 0
