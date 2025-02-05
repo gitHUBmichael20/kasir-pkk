@@ -32,10 +32,6 @@ Website kasir ini merupakan aplikasi berbasis web yang dibangun menggunakan **Ta
   ```sh
   cd nama_proyek
   ```
-- Jalankan perintah berikut untuk menginstal dependensi frontend (jika diperlukan):
-  ```sh
-  npm install
-  ```
 
 ### 3️⃣ Menjalankan Aplikasi
 - Jalankan web server Anda (Apache dan MySQL di XAMPP/Laragon).
