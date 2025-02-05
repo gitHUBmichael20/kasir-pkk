@@ -26,11 +26,11 @@ Website kasir ini merupakan aplikasi berbasis web yang dibangun menggunakan **Ta
 ### 2️⃣ Instalasi
 - Clone repositori ini ke direktori web server Anda:
   ```sh
-  git clone https://github.com/username/repository.git
+  git clone https://github.com/gitHUBmichael20/kasir-pkk.git
   ```
 - Pindah ke direktori proyek:
   ```sh
-  cd nama_proyek
+  cd kasir-pkk
   ```
 
 ### 3️⃣ Menjalankan Aplikasi
