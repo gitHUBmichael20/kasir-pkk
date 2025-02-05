@@ -37,18 +37,12 @@ Website kasir ini merupakan aplikasi berbasis web yang dibangun menggunakan **Ta
 - Jalankan web server Anda (Apache dan MySQL di XAMPP/Laragon).
 - Buka browser dan akses proyek melalui URL:
   ```sh
-  http://localhost/nama_proyek
+  http://localhost/kasir-pkk
   ```
 - Website kasir siap digunakan! 🎉
 
-## 🤝 Kontribusi
+## 🤝 Kontributor
 Tim PKK CODING
-
-## 📜 Lisensi
-Proyek ini dilisensikan di bawah **[Nama Lisensi]**.
-
-## 📧 Kontak
-Jika Anda memiliki pertanyaan, saran, atau menemukan bug, silakan hubungi kami melalui email: **[Alamat Email Anda]**.
 
 ---
 🚀 Dibuat dengan ❤️ oleh **Tim PKK CODING**
