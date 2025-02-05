@@ -55,6 +55,25 @@ if ($where_clause) {
 }
 $stmt_daily->execute();
 $result_daily = $stmt_daily->get_result();
+
+// Query untuk mendapatkan total pendapatan per produk
+$sql_produk = "SELECT 
+    p.NAME as product_name,
+    SUM(td.quantity * td.price) as total_pendapatan,
+    SUM(td.quantity) as jumlah_transaksi
+FROM transaction_details td
+JOIN product p ON td.product_id = p.ID_PRODUCT
+JOIN transactions t ON td.transaction_id = t.id
+" . $where_clause . "
+GROUP BY p.ID_PRODUCT
+ORDER BY total_pendapatan DESC";
+
+$stmt_produk = $conn->prepare($sql_produk);
+if ($where_clause) {
+    $stmt_produk->bind_param("ss", $start_date, $end_date);
+}
+$stmt_produk->execute();
+$result_produk = $stmt_produk->get_result();
 ?>
 
 
@@ -117,6 +136,30 @@ $result_daily = $stmt_daily->get_result();
                                 <td class="px-6 py-4"><?= date('d F Y', strtotime($row['tanggal'])) ?></td>
                                 <td class="px-6 py-4"><?= $row['jumlah_transaksi'] ?></td>
                                 <td class="px-6 py-4"><?= formatRupiah($row['total_harian']) ?></td>
+                            </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Tabel Pendapatan per Produk -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mt-6">
+                <h2 class="text-xl font-bold p-4 bg-gray-50">Pendapatan per Produk</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama Produk</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Jumlah Terjual</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total Pendapatan</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <?php while ($row_produk = $result_produk->fetch_assoc()): ?>
+                            <tr>
+                                <td class="px-6 py-4"><?= htmlspecialchars($row_produk['product_name']) ?></td>
+                                <td class="px-6 py-4"><?= $row_produk['jumlah_transaksi'] ?></td>
+                                <td class="px-6 py-4"><?= formatRupiah($row_produk['total_pendapatan']) ?></td>
                             </tr>
                             <?php endwhile; ?>
                         </tbody>
