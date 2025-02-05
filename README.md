@@ -1,4 +1,3 @@
-Tentu, ini adalah contoh dokumentasi README GitHub untuk menjelaskan website kasir dengan framework CSS Tailwind dan native PHP:
 
 ```markdown
 # Website Kasir Sederhana dengan Tailwind CSS dan Native PHP
