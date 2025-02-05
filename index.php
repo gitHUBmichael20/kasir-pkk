@@ -65,8 +65,8 @@
 </head>
 
 <body class="bg-cyan-500 min-h-screen flex items-center justify-center">
-    <section class="flex h-[100vh] w-[100vw]">
-        <div class="left-side m-auto flex justify-center align-center w-[50%]">
+    <section class="login flex h-[100vh] w-[100vw]">
+        <div class="logo left-side m-auto flex justify-center align-center w-[50%]">
             <img src="src/image/marketopia_logo.png" alt="">
         </div>
         <div class="right-side w-[50%] m-auto flex justify-center align-center">
